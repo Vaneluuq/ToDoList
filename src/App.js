@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import './App.css';
-import Login from './componenets/Login';
-import Register from './componenets/Register';
-import LandingPage from './componenets/LandingPage';
-import TaskList from './componenets/Home';
+import Login from './componenets/login/Login';
+import Register from './componenets/login/Register';
+import LandingPage from './componenets/views/LandingPage';
+import TaskList from './componenets/views/Home';
 
 
 

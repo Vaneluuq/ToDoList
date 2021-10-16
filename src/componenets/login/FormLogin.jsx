@@ -1,5 +1,5 @@
 import React from 'react'
-import LoginCSS from '../CSS/signUpAndLogin.module.css'
+import LoginCSS from './signUpAndLogin.module.css'
 
 
 const Form = (props) => {

@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from '../CSS/landingPage.module.css'
-import Login from './Login'
-import Register from './Register';
+import styles from './landingPage.module.css'
+import Login from '../login/Login'
+import Register from '../login/Register';
 import { useState } from 'react';
 
 const LandingPage = () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import tasksCSS from '../CSS/tasksList.module.css'
+import tasksCSS from './task.module.css'
 
 
 function SearchTask(props) {
@@ -13,7 +13,6 @@ function SearchTask(props) {
 
   const inputChange = (e) => setSearchTask(e.target.value);
  
-
 
     return (
      <div className={tasksCSS.search}>

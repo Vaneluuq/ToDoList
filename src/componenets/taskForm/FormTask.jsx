@@ -1,7 +1,7 @@
 import React from 'react'
-import taskCSS from '../CSS/task.module.css'
+import taskCSS from './task.module.css'
 import { useState, useEffect} from 'react';
-import {getIdTask} from './firebaseAuth'
+import {getIdTask} from '../login/firebaseAuth'
 
 const FormTask= (props) => {
     const {
@@ -52,12 +52,12 @@ const FormTask= (props) => {
     return ( 
      <form className ={taskCSS.taskMainList} onSubmit={handleSubmit}>
         <input id="descriptionTask" 
-                placeholder="Escribe tu nota aqui"
-                value={descriptionTask}
+                placeholder="Escribe tu tarea aqui"
+                value={existId === "" ? descriptionTask : data.descriptionTask}
                 name="descriptionTask"
                 onChange={handleInputChange}
                 required/>
-      <button type="submit" className="btn-guardar"> Guardar</button>
+      <button type="submit" className="btn-guardar">  {existId === "" ? "Guardar" : "Actualizar"}</button>
      </form>
     );
 }

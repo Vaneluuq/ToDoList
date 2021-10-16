@@ -1,10 +1,9 @@
 import React from 'react'
 import Form from './FormLogin';
-// import img from "../assets/login.jpg"
 import { useState , useEffect} from 'react';
 import { createUser , authListener } from './firebaseAuth';
 import { Redirect } from 'react-router-dom';
-import { fb } from '../firebase';
+import { fb } from '../initializers/firebase';
 
 
 const Register = () => {

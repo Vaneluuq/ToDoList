@@ -1,28 +1,30 @@
 import React, { useState, useEffect} from 'react' 
-import FormTask from './FormTask'
-import { createTasks, editingTask, getTasks} from './firebaseAuth';
-import tasksCSS from '../CSS/tasksList.module.css'
-import Task from './Task';
-import SearchTask from './SearchTask';
+import FormTask from '../taskForm/FormTask'
+import { createTasks, editingTask, getTasks, deleteTask} from '../login/firebaseAuth';
+import tasksCSS from '../taskForm/task.module.css'
+import Task from '../taskForm/Task';
+import SearchTask from '../taskForm/SearchTask';
+import swal from 'sweetalert'
 
 
 
 const TaskList = () => {
     const [tasks, setTask] = useState([]);
     const [existId, setExistId] = useState("");
-    const [checked, setChecked] = useState(false);
     const [searchTask, setSearchTask] = useState("");
-    // const [optionSearchTask, setOptionSearchTask] = useState("bodyOption")
- 
-    // se valida si el input checkbox esta activo o no
-    const handleChange = () => {setChecked(!checked)};
 
-
-    const addTaskCollection = async (notesObj) => { await createTasks(notesObj)}
+    const addTaskCollection = async (notesObj) => { 
+      if(existId ===""){   
+        await createTasks(notesObj);
+        }else{
+          await editingTask(existId, notesObj)
+          setExistId("")
+      }  
+    }
 
 
     const filterNote = async(objNote, searchNote) => {
-          const filterByBody = await objNote.filter(nota => nota.body.toLowerCase().includes(searchNote.toLowerCase()))
+          const filterByBody = await objNote.filter(task => task.descriptionTask.toLowerCase().includes(searchNote.toLowerCase()))
           setTask(filterByBody)
       };
 
@@ -45,6 +47,20 @@ const TaskList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []); 
 
+
+    const deleteTasks = (id) => {
+      swal({
+        title: "Se eliminará tu nota",
+        text: "Quieres continuar?",
+        icon: "warning",
+        buttons: ["No", "Si"]
+        }).then(respuesta => {
+        if(respuesta){
+          deleteTask(id);
+        }
+      })
+    }
+
     return(
     <div className= {tasksCSS.containerTaskList}>
       <div className= {tasksCSS.searchTask}>
@@ -65,11 +81,11 @@ const TaskList = () => {
           tasks.map((task)=>( 
             <Task
             key={task.id} 
-            checked={checked}
-            onChange={handleChange}
             description = {task.descriptionTask}
             button1 = {"Borrar"}
+            onClick={() => deleteTasks(task.id)}
             button2 = {"Editar"}
+            onClick2 = {() => setExistId(task.id)}
             />
            ))
         )}

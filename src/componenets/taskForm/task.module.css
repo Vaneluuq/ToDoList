@@ -67,3 +67,51 @@
     cursor: pointer;
     background: honeydew;
 }
+
+.containerTaskList{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 10% 80%;
+}
+
+.searchTask{
+    width: 100%;
+    height: 100%;
+    grid-row-start:1;
+    grid-row-end: 2;
+}
+
+.addTasks {
+    width: 100%;
+    height: 100%;
+    grid-row-start:2;
+    grid-row-end: 3;
+
+}
+
+.containerTasks {
+    width: 100%;
+    height: 100%;
+    grid-row-start:3;
+    grid-row-end: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ 
+}
+
+.search{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search input {
+    width: 40%;
+    height: 2em;
+
+}

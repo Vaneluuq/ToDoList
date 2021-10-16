@@ -1,4 +1,4 @@
-import  { fb, db } from '../firebase'
+import  { fb, db } from '../initializers/firebase'
 
 //firebase auth 
 
