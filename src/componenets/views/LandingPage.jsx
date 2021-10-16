@@ -4,6 +4,7 @@ import Login from '../login/Login'
 import Register from '../login/Register';
 import { useState } from 'react';
 
+// componente que renderiza el inicio de sesion o registro de usuario
 const LandingPage = () => {
     const [hasAccount, setHasAccount] = useState(false);
     return (  

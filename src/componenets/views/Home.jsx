@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react' 
-import { createTasks, editingTask, getTasks, deleteTask} from '../login/firebaseAuth';
+import { createTasks, editingTask, getTasks, deleteTask, handleLogout, createPhrases} from '../login/firebaseAuth';
 import FormTask from '../taskForm/FormTask'
 import Task from '../taskForm/Task';
 import SearchTask from '../taskForm/SearchTask';
@@ -8,6 +8,7 @@ import swal from 'sweetalert'
 import tasksCSS from '../taskForm/task.module.css'
 
 
+// componente que renderiza los diversos componentes que conforman el home 
 
 const TaskList = () => {
     // se guardan las tareas 
@@ -21,21 +22,21 @@ const TaskList = () => {
     //se guardan frases de la api de gatos 
     const [items, setItems] = useState([]);
     // se guardan frases con filtro 
-    const [userItems, setUserItems] = useState([]);
+    const [userPhases, setUserPrases] = useState([]);
 
     // se identifica el valor del input num (numero de frases seleccionadas por el usuario)
     const numberFacts = (e) => setNum(e.target.value);
 
 
-
     // funcion que relaciona input num y api frases
       const frasesSelect =() => {
-        let frases;
-        for (let i = num; i < items.length; i++) {
-         frases += items[i].fact + "----------"
+       let frases = []
+        for (let i = 0; i < items.length; i++) {
+         frases.push(items[i].fact)
         }
-        setUserItems(frases);
-   }
+       let frasesUsuario = frases.splice(0, num)
+       setUserPrases(frasesUsuario)
+     }
 
 
     // Se crea o edita una tarea
@@ -90,9 +91,11 @@ const TaskList = () => {
       })
     }
 
+
     return(
     <div className= {tasksCSS.containerTaskList}>
       <div className= {tasksCSS.searchTask}>
+        <button onClick={handleLogout}>Logout</button>
         <SearchTask
             searchTask = {searchTask}
             setSearchTask = {setSearchTask}
@@ -124,13 +127,23 @@ const TaskList = () => {
             />
            ))
         )}
+          {(
+          userPhases.map((item) => (
+           <Task
+            key={item.id} 
+            description = {item}
+            button1 = {"Borrar"}
+            onClick={() => deleteTasks(item.id)}
+            button2 = {"Editar"}
+            onClick2 = {() => setExistId(item.id)}
+            />
+        ))
+      )}
 
       <CatFacts
       items = {items}
       setItems = {setItems}/>
       </div>
-      <p>{userItems}</p>
-
     </div>
     )
 }

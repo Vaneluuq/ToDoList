@@ -1,7 +1,7 @@
 import React from 'react'
 import tasksCSS from './task.module.css'
 
-
+// componente que renderiza el formato de las tareas en pantalla
 const Task = ({key, description, button1, button2, onClick, onClick2}) => {
     return (    
     <div id="showNotesContainer" key={key} className={tasksCSS.showTaskContainer}>

@@ -2,6 +2,7 @@ import React from 'react'
 import LoginCSS from './signUpAndLogin.module.css'
 
 
+// componente base para la estructura principal de inicio de sesion o registro
 const Form = (props) => {
    const {
     email,

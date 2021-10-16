@@ -2,24 +2,19 @@ import React from 'react'
 import tasksCSS from './task.module.css'
 
 
-function SearchTask(props) {
-  const {
-      searchTask,
-      setSearchTask,
-      getTasksToScreen
-    
-  } = props
-
+// componente de barra de busqueda de tareas 
+function SearchTask({searchTask, setSearchTask, getTasksToScreen}) {
 
   const inputChange = (e) => setSearchTask(e.target.value);
  
-
     return (
      <div className={tasksCSS.search}>
-        <input type="text" placeholder="Buscar mi nota"  
-            value={searchTask} onChange={inputChange} onKeyUp={getTasksToScreen}/>    
+        <input type="text" 
+               placeholder="Buscar mi nota"  
+               value={searchTask} 
+               onChange={inputChange} 
+               onKeyUp={getTasksToScreen}/>    
       </div>
-
     );
   }
 

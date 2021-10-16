@@ -3,6 +3,7 @@ import taskCSS from './task.module.css'
 import { useState, useEffect} from 'react';
 import {getIdTask} from '../login/firebaseAuth'
 
+// componente formato principal para la creacion de tareas 
 const FormTask= (props) => {
     const {
      addTaskCollection, 
