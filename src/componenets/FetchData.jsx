@@ -2,10 +2,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 
-function CatFacts() {
+function CatFacts({items, setItems}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
+
 
     useEffect(() => {
       fetch("https://catfact.ninja/facts?limit=${bred}")
@@ -21,8 +21,6 @@ function CatFacts() {
           }
         )
     }, [])
-
-    console.log(items)
   
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -31,11 +29,11 @@ function CatFacts() {
     } else {
       return (
       <div>
-         {items.map(item => (
+         {/* {items.map(item => (
               <div key={item.id}>
                  <p>{item.fact}</p>
               </div>
-            ))}
+            ))} */}
       </div>
       );
     }
