@@ -38,7 +38,8 @@ const Form = (props) => {
 
                      { nameUser ? 
                         (
-                        <><input type="text" placeholder="Nombre de Usuario"
+                        <>
+                        <input type="text" placeholder="Nombre de Usuario"
                             value={displayName} onChange={userChange}/>
                             <br />
                         </>

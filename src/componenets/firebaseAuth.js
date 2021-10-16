@@ -1,4 +1,4 @@
-import  { fb } from '../firebase'
+import  { fb, db } from '../firebase'
 
 //firebase auth 
 
@@ -10,9 +10,24 @@ const createUser = (email, password) => fb.auth().createUserWithEmailAndPassword
 
 const authListener = (callback) => fb.auth().onAuthStateChanged(callback)
 
-const listenToAuthState = (onLogIn, onLogOut, callback) => 
-fb.auth().onAuthStateChanged(callback)
+// const listenToAuthState = (onLogIn, onLogOut, callback) => 
+// fb.auth().onAuthStateChanged(callback)
 
 
 
-export { handleLogout, loginUser, authListener, createUser, listenToAuthState}
+// firestore 
+
+const createTasks =(notesObj)=> db.collection('tasks').doc().set(notesObj);
+
+const getTasks = (callback) => db.collection('tasks').onSnapshot(callback);
+
+
+const editingTask = (id, notesObj) => db.collection('tasks').doc(id).update(notesObj);
+
+const deleteTask = (id) => db.collection('tasks').doc(id).delete();
+
+const getIdTask =(id) => db.collection("tasks").doc(id).get()
+
+
+export { handleLogout, loginUser, authListener, createUser,
+getTasks, createTasks, editingTask , deleteTask, getIdTask}

@@ -3,6 +3,7 @@ import './App.css';
 import Login from './componenets/Login';
 import Register from './componenets/Register';
 import LandingPage from './componenets/LandingPage';
+import TaskList from './componenets/Home';
 
 
 
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/signup">
           <Register></Register>
+        </Route>
+        <Route path="/home">
+          <TaskList></TaskList>
         </Route>
       </Switch> 
       </div>
