@@ -1,0 +1,38 @@
+.containerForm{
+    text-align: center;
+}
+.itemsForm {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: azure;
+}
+
+.itemsForm input {
+    width: 15em;
+    height: 2em;
+    border: 0.2em #22577A solid;
+}
+
+.itemsForm button {
+    margin-top: 2em;
+    width: 15em;
+    height: 2.5em;
+    background:#38A3A5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border: #22577A solid;
+}
+
+.itemsForm button:hover{
+    background: #22577A;
+}
+
+.itemsForm a{
+    color: white
+}
+
+.itemsForm a:hover {
+    color: #22577A;;
+}

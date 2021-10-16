@@ -1,0 +1,63 @@
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #57CC99;
+
+}
+
+.containerLogin{
+    text-align: center;
+}
+
+.account p{
+    margin-top: 3em;
+    font-weight: bold;
+}
+
+.account button {
+    background:none;
+    color: #22577A;
+    text-decoration: underline;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
+@media (min-width: 700px) {
+
+.container{
+    background:#80ed998c;
+}
+
+.containerLogin{
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    height: auto;
+ }
+ 
+
+.title{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 2em;
+    background: #57CC99;
+}  
+
+
+.account button {
+    cursor: pointer;
+}
+
+.account button:hover {
+ color: rgb(247, 233, 231);
+ font-size: 1.3em;
+}
+
+}
