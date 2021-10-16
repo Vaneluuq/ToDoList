@@ -1,10 +1,11 @@
 import React, { useState, useEffect} from 'react' 
-import FormTask from '../taskForm/FormTask'
 import { createTasks, editingTask, getTasks, deleteTask} from '../login/firebaseAuth';
-import tasksCSS from '../taskForm/task.module.css'
+import FormTask from '../taskForm/FormTask'
 import Task from '../taskForm/Task';
 import SearchTask from '../taskForm/SearchTask';
+import CatFacts from '../FetchData';
 import swal from 'sweetalert'
+import tasksCSS from '../taskForm/task.module.css'
 
 
 
@@ -12,6 +13,10 @@ const TaskList = () => {
     const [tasks, setTask] = useState([]);
     const [existId, setExistId] = useState("");
     const [searchTask, setSearchTask] = useState("");
+    const [num, setNum] = React.useState(1);
+  
+    const numberFacts = (e) => setNum(e.target.value);
+    console.log(num)
 
     const addTaskCollection = async (notesObj) => { 
       if(existId ===""){   
@@ -71,6 +76,12 @@ const TaskList = () => {
             />
       </div>
       <div className= {tasksCSS.addTask}>
+        <div className= {tasksCSS.numbersFacts}>
+          <label for="frases">Numero de frases aleatorias a traer(1-10):</label>
+          <input type="number" id="tentacles" name="tentacles" min="1" max="10" value={num}  onChange={numberFacts}/>
+          <button>Generar</button>
+
+        </div>
         <FormTask
         addTaskCollection = {addTaskCollection}
         existId ={existId}
@@ -89,6 +100,8 @@ const TaskList = () => {
             />
            ))
         )}
+
+      <CatFacts></CatFacts>
       </div>
 
     </div>

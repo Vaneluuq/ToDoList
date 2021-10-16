@@ -68,12 +68,14 @@
     background: honeydew;
 }
 
+
+/************************ Home ********************************/
 .containerTaskList{
     width: 100%;
     height: 100vh;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 10% 10% 80%;
+    grid-template-rows: 10% 15% 75%;
 }
 
 .searchTask{
@@ -83,13 +85,42 @@
     grid-row-end: 2;
 }
 
-.addTasks {
+.addTask {
     width: 100%;
     height: 100%;
     grid-row-start:2;
     grid-row-end: 3;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.numbersFacts{
+    display: flex;
+    align-items: center;
+}
+
+.numbersFacts label {
+    display: block;
+    width: 100%;
+}
+
+.numbersFacts input {
+    margin-top: 0.5em;
+    width: 50%;
+    height: 2em;
+    border: rgb(98, 202, 233) solid;
+}
+
+.numbersFacts button {
+    margin-top: 0.5em;
+    width: 20%;
+    height: 2.5em;
+    background: rgb(98, 202, 233);
+    border: rgb(98, 202, 233) solid;
+}
+
 
 .containerTasks {
     width: 100%;
