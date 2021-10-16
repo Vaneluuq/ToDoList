@@ -7,8 +7,7 @@ const FormTask= (props) => {
     const {
      addTaskCollection, 
      descriptionTask, 
-     existId, 
-     checked
+     existId
      
     } = props
 
@@ -51,8 +50,7 @@ const FormTask= (props) => {
 
 
     return ( 
-     <form className ={taskCSS.notesMain} onSubmit={handleSubmit}>
-     
+     <form className ={taskCSS.taskMainList} onSubmit={handleSubmit}>
         <input id="descriptionTask" 
                 placeholder="Escribe tu nota aqui"
                 value={descriptionTask}

@@ -1,0 +1,69 @@
+.taskMainList{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.taskMainList input {
+    width: 30%;
+    height: 3em;
+    border: rgb(159, 233, 98) solid;
+} 
+
+.taskMainList button {
+    width: 10%;
+    height: 3.6em;
+    border: rgb(159, 233, 98) solid;
+    background: rgb(159, 233, 98);
+    cursor: pointer;
+} 
+
+.showTaskContainer{
+    width: 40%;
+    height: 4em;
+    display: grid;
+    grid-template-columns: 10% 70% 20%;
+    grid-template-rows:100%;
+    background: greenyellow;
+    margin: 0.5em;
+}
+
+.checkbox{
+    width: 100%;
+    height: 100%;
+    grid-column-start:1;
+    grid-column-end: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.description{
+    width: 100%;
+    height: 100%;
+    grid-column-start:2;
+    grid-column-end: 3;
+    display: flex;
+    align-items: center;
+}
+
+.editContainer{
+    width: 100%;
+    height: 100%;
+    grid-column-start:3;
+    grid-column-end: 4;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.editContainer button {
+    width: 100%;
+    height: 100%;
+    border: greenyellow solid 0.1em;
+    cursor: pointer;
+    background: honeydew;
+}

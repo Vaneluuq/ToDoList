@@ -12,7 +12,7 @@ const TaskList = () => {
     const [existId, setExistId] = useState("");
     const [checked, setChecked] = useState(false);
     const [searchTask, setSearchTask] = useState("");
-    const [optionSearchTask, setOptionSearchTask] = useState("bodyOption")
+    // const [optionSearchTask, setOptionSearchTask] = useState("bodyOption")
  
     // se valida si el input checkbox esta activo o no
     const handleChange = () => {setChecked(!checked)};
@@ -20,11 +20,10 @@ const TaskList = () => {
 
     const addTaskCollection = async (notesObj) => { await createTasks(notesObj)}
 
-    const filterNote = async(objNote, searchNote, option) => {
-        if(optionSearchTask === option){
-          const notaFiltradaByBody = await objNote.filter(nota => nota.body.toLowerCase().includes(searchNote.toLowerCase()))
-          setTask(notaFiltradaByBody)
-        }
+
+    const filterNote = async(objNote, searchNote) => {
+          const filterByBody = await objNote.filter(nota => nota.body.toLowerCase().includes(searchNote.toLowerCase()))
+          setTask(filterByBody)
       };
 
     const getTasksToScreen = async () => {
@@ -36,32 +35,33 @@ const TaskList = () => {
             if(searchTask ===""){
                 setTask(myTask);
               }else{
-                filterNote(myTask, searchTask, optionSearchTask)
+                filterNote(myTask, searchTask)
               }
-           
         });      
     };
+    
     useEffect(() => {
     getTasksToScreen() 
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []); 
 
     return(
-    <>
-     <SearchTask
-        searchTask = {searchTask}
-        setSearchTask = {setSearchTask}
-        optionSearchTask = {optionSearchTask}
-        setOptionSearchTask = {setOptionSearchTask}
-        getTasksToScreen = {getTasksToScreen}
+    <div className= {tasksCSS.containerTaskList}>
+      <div className= {tasksCSS.searchTask}>
+        <SearchTask
+            searchTask = {searchTask}
+            setSearchTask = {setSearchTask}
+            getTasksToScreen = {getTasksToScreen}
+            />
+      </div>
+      <div className= {tasksCSS.addTask}>
+        <FormTask
+        addTaskCollection = {addTaskCollection}
+        existId ={existId}
         />
-
-      <FormTask
-      addTaskCollection = {addTaskCollection}
-      existId ={existId}
-      />
-      <div>
-      {(
+      </div>
+      <div className= {tasksCSS.containerTasks}>
+        {(
           tasks.map((task)=>( 
             <Task
             key={task.id} 
@@ -72,10 +72,10 @@ const TaskList = () => {
             button2 = {"Editar"}
             />
            ))
-      )}
-
+        )}
       </div>
-    </>
+
+    </div>
     )
 }
 
