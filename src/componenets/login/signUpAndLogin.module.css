@@ -36,3 +36,24 @@
 .itemsForm a:hover {
     color: #22577A;;
 }
+
+.providers p {
+    margin-top: 2em;
+ font-weight:bolder;
+}
+
+.providers button {
+    cursor: pointer;
+    width: 4em;
+    height: 3em;
+    background: white;
+    border: none;
+    color: #38A3A5;
+}
+
+
+.providers button:hover {
+    background: #22577A;
+    color: white;
+}
+

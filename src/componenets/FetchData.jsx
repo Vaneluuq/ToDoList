@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 
-function CatFacts({items, setItems}) {
+function CatFacts({setItems}) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -28,13 +28,7 @@ function CatFacts({items, setItems}) {
       return <div>Loading...</div>;
     } else {
       return (
-      <div>
-         {/* {items.map(item => (
-              <div key={item.id}>
-                 <p>{item.fact}</p>
-              </div>
-            ))} */}
-      </div>
+       <> </>
       );
     }
  }

@@ -7,7 +7,7 @@ import CatFacts from '../FetchData';
 import swal from 'sweetalert'
 import tasksCSS from '../taskForm/task.module.css'
 import nextId from "react-id-generator";
-import { Redirect } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 
 // componente que renderiza los diversos componentes que conforman el home 
@@ -51,10 +51,11 @@ const TaskList = () => {
     }
 
    // se filtran las tareas por texto de descripcion 
-    const filterNote = async(objNote, searchNote) => {
+    const filterTask = async(objNote, searchNote) => {
           const filterByBody = await objNote.filter(task => task.descriptionTask.toLowerCase().includes(searchNote.toLowerCase()))
           setTask(filterByBody)
       };
+
 
     // se obtienen las tareas de firebase y se muestran en pantalla
     const getTasksToScreen = async () => {
@@ -66,7 +67,7 @@ const TaskList = () => {
             if(searchTask ===""){
                 setTask(myTask);
               }else{
-                filterNote(myTask, searchTask)
+                filterTask(myTask, searchTask)
               }
         });      
     };
@@ -109,16 +110,51 @@ const TaskList = () => {
       })
     }
 
+    // se borran las frases
     const deletePhrase = id => {
       const removeArray = [...userPhrases].filter(phrase => phrase.id !== id)
+      swal({
+        title: "Se eliminará tu tarea",
+        text: "Quieres continuar?",
+        icon: "warning",
+        buttons: ["No", "Si"]
+        }).then(respuesta => {
+        if(respuesta){
       setUserPhrases(removeArray)
-    }
+        }
+     })
+  }
 
+
+  const [showLogout, setShowLogout] = useState(false)
+
+  function openModal() {
+    setShowLogout(true);
+ }
+
+ // Se cierra modal que crea o edita nota
+ const closeModal = () => {
+   setShowLogout(false);
+ }
 
 
     return(
     <div className= {tasksCSS.containerTaskList}>
-      {/* <button type="button" onClick={logout()}>Logout</button> */}
+     {
+      showLogout ? (
+        <div className= {tasksCSS.logout}>
+         <button onClick= {closeModal}><i class="fas fa-window-close"></i></button>
+          <Link to="/">
+                <button onClick= {handleLogout}><i class="fas fa-sign-out-alt">LogOut</i></button>
+          </Link>
+        </div>
+
+      ): (
+        <div className= {tasksCSS.showLogout}>
+           <button onClick= {openModal}>Ver más</button>
+        </div>
+      )
+    } 
       <div className= {tasksCSS.searchTask}>
         <h2>To-Do-Helper</h2>
         <SearchTask
@@ -165,11 +201,10 @@ const TaskList = () => {
             />
         ))
       )}
-
+      </div>
       <CatFacts
       items = {items}
       setItems = {setItems}/>
-      </div>
     </div>
     )
 }

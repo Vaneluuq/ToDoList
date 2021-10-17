@@ -58,7 +58,7 @@ const Form = (props) => {
                 </form> 
                 <div className={LoginCSS.providers}>
                     <p>Ó Continuar con</p>
-                    <button onClick = { handleGoogle }>google</button>
+                    <button onClick = { handleGoogle }>  <i className="fab fa-google fa-2x"></i> </button>
                 </div> 
         </section>
     );
