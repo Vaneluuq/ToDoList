@@ -8,19 +8,18 @@ function CatFacts({setItems}) {
 
 
     useEffect(() => {
-      fetch("https://catfact.ninja/facts?limit=${bred}")
+      fetch("https://catfact.ninja/facts?")
         .then(res => res.json())
         .then((result) => {
           setIsLoaded(true);
           setItems(result.data);
-           },
+        },
           (error) => {
-            console.log(error)
             setIsLoaded(true);
             setError(error);
           }
         )
-    }, [])
+    }, []);
   
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -28,7 +27,9 @@ function CatFacts({setItems}) {
       return <div>Loading...</div>;
     } else {
       return (
-       <> </>
+       <div>
+         
+       </div>
       );
     }
  }

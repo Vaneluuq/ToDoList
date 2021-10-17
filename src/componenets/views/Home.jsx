@@ -8,6 +8,7 @@ import swal from 'sweetalert'
 import tasksCSS from '../taskForm/task.module.css'
 import nextId from "react-id-generator";
 import { Link} from 'react-router-dom';
+import { fb } from '../initializers/firebase';
 
 
 // componente que renderiza los diversos componentes que conforman el home 
@@ -27,15 +28,7 @@ const TaskList = () => {
     const [userPhrases, setUserPhrases] = useState([]);
     // const [phasesToScreen, setPhasesToScreen] = useState([]);
 
-
-    const logout = () => {
-      console.log("nada")
-      handleLogout().then(() => {  
-        console.log("hola")     
-      }).catch(function(error) {
-        console.log(error)
-      });
-    }
+    const user = fb.auth().currentUser;
 
     // se identifica el valor del input num (numero de frases seleccionadas por el usuario)
     const numberFacts = (e) => setNum(e.target.value);
@@ -63,12 +56,12 @@ const TaskList = () => {
             const myTask = [];
             querySnapshot.forEach(doc => {
             myTask.push({...doc.data(), id:doc.id});
-            });
+            })
             if(searchTask ===""){
-                setTask(myTask);
-              }else{
-                filterTask(myTask, searchTask)
-              }
+                 setTask(myTask);
+            }else{
+              filterTask(myTask, searchTask)
+            }
         });      
     };
 

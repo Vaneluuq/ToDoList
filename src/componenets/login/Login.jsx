@@ -77,8 +77,7 @@ const handleGoogle = () => {
        <div>  
           { user ? (
            <Redirect to ="/home"></Redirect>
-        //  <Home handleLogout = {handleLogout}/>
-          ) : (
+            ) : (
             <Form
             greeting = "Ingresa a tu cuenta"
             btnLabel = "Ingresar"

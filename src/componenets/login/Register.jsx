@@ -94,6 +94,7 @@ const Register = () => {
       displayName = {displayName}
       nameUser = {nameUser}
       handleGoogle = {handleGoogle}
+      setNameUser = {setNameUser}
       />   
      )}
     </div>

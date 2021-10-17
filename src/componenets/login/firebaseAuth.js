@@ -14,9 +14,6 @@ const createUser = (email, password) => fb.auth().createUserWithEmailAndPassword
 
 const authListener = (callback) => fb.auth().onAuthStateChanged(callback);
 
-// const listenToAuthState = (onLogIn, onLogOut, callback) => 
-// fb.auth().onAuthStateChanged(callback)
-
 
 
 // firestore 
@@ -25,7 +22,7 @@ const createTasks =(notesObj)=> db.collection('tasks').doc().set(notesObj);
 const createPhrases =(notesObj)=> db.collection('phrases').doc().set(notesObj);
 
 
-const getTasks = (callback) => db.collection('tasks').onSnapshot(callback);
+const getTasks = (callback) => db.collection('tasks').orderBy('lastModified', 'desc').onSnapshot(callback);
 const getPhrases = (callback) => db.collection('phrases').onSnapshot(callback);
 
 

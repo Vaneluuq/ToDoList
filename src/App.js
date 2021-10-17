@@ -16,7 +16,7 @@ import {
 function App() {
   return (
     <Fragment>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
       <div className="container">
       <Switch>
         <Route path="/" exact>
