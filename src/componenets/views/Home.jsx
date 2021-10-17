@@ -118,9 +118,9 @@ const TaskList = () => {
 
     return(
     <div className= {tasksCSS.containerTaskList}>
-      <button type="button" onClick={logout()}>Logout</button>
+      {/* <button type="button" onClick={logout()}>Logout</button> */}
       <div className= {tasksCSS.searchTask}>
-        {/* <h2>To-Do-List</h2> */}
+        <h2>To-Do-Helper</h2>
         <SearchTask
             searchTask = {searchTask}
             setSearchTask = {setSearchTask}
