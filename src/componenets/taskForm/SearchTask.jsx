@@ -13,7 +13,8 @@ function SearchTask({searchTask, setSearchTask, getTasksToScreen}) {
                placeholder="Buscar mi nota"  
                value={searchTask} 
                onChange={inputChange} 
-               onKeyUp={getTasksToScreen}/>    
+               onKeyUp={getTasksToScreen}/>   
+        <button type="button"><i className="fas fa-search"></i></button> 
       </div>
     );
   }

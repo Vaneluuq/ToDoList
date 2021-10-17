@@ -1,11 +1,13 @@
 import React, { useState, useEffect} from 'react' 
-import { createTasks, editingTask, getTasks, deleteTask, handleLogout, createPhrases} from '../login/firebaseAuth';
+import { createTasks, editingTask, getTasks, deleteTask, handleLogout} from '../login/firebaseAuth';
 import FormTask from '../taskForm/FormTask'
 import Task from '../taskForm/Task';
 import SearchTask from '../taskForm/SearchTask';
 import CatFacts from '../FetchData';
 import swal from 'sweetalert'
 import tasksCSS from '../taskForm/task.module.css'
+import nextId from "react-id-generator";
+import { Redirect } from 'react-router-dom';
 
 
 // componente que renderiza los diversos componentes que conforman el home 
@@ -21,23 +23,22 @@ const TaskList = () => {
     const [num, setNum] = useState(1);
     //se guardan frases de la api de gatos 
     const [items, setItems] = useState([]);
-    // se guardan frases con filtro 
-    const [userPhases, setUserPrases] = useState([]);
+    // se guardan frases en firebase 
+    const [userPhrases, setUserPhrases] = useState([]);
+    // const [phasesToScreen, setPhasesToScreen] = useState([]);
+
+
+    const logout = () => {
+      console.log("nada")
+      handleLogout().then(() => {  
+        console.log("hola")     
+      }).catch(function(error) {
+        console.log(error)
+      });
+    }
 
     // se identifica el valor del input num (numero de frases seleccionadas por el usuario)
     const numberFacts = (e) => setNum(e.target.value);
-
-
-    // funcion que relaciona input num y api frases
-      const frasesSelect =() => {
-       let frases = []
-        for (let i = 0; i < items.length; i++) {
-         frases.push(items[i].fact)
-        }
-       let frasesUsuario = frases.splice(0, num)
-       setUserPrases(frasesUsuario)
-     }
-
 
     // Se crea o edita una tarea
     const addTaskCollection = async (notesObj) => { 
@@ -55,7 +56,6 @@ const TaskList = () => {
           setTask(filterByBody)
       };
 
-
     // se obtienen las tareas de firebase y se muestran en pantalla
     const getTasksToScreen = async () => {
         getTasks((querySnapshot) => {
@@ -70,9 +70,27 @@ const TaskList = () => {
               }
         });      
     };
-    
+
+        // funcion que relaciona input num y api frases
+        let phrasesSelect =() => {
+          let phrasesFromItems = []
+           for (let i = 0; i < items.length; i++) {
+             phrasesFromItems.push(items[i].fact)
+            }
+          let numberOfPhrases = phrasesFromItems.splice(0, num);
+ 
+           let phrasesToShow =[]
+            numberOfPhrases.forEach(frase => 
+             phrasesToShow.push({frasesUsuario: frase, id:nextId()})
+             )
+            setUserPhrases(phrasesToShow);
+        };
+
+
+       //  let random = Math.floor(Math.random() * item.length)
+
       useEffect(() => {
-        getTasksToScreen() 
+        getTasksToScreen();
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []); 
 
@@ -80,7 +98,7 @@ const TaskList = () => {
    // se borran las tareas 
     const deleteTasks = (id) => {
       swal({
-        title: "Se eliminará tu nota",
+        title: "Se eliminará tu tarea",
         text: "Quieres continuar?",
         icon: "warning",
         buttons: ["No", "Si"]
@@ -91,11 +109,18 @@ const TaskList = () => {
       })
     }
 
+    const deletePhrase = id => {
+      const removeArray = [...userPhrases].filter(phrase => phrase.id !== id)
+      setUserPhrases(removeArray)
+    }
+
+
 
     return(
     <div className= {tasksCSS.containerTaskList}>
+      <button type="button" onClick={logout()}>Logout</button>
       <div className= {tasksCSS.searchTask}>
-        <button onClick={handleLogout}>Logout</button>
+        {/* <h2>To-Do-List</h2> */}
         <SearchTask
             searchTask = {searchTask}
             setSearchTask = {setSearchTask}
@@ -105,9 +130,10 @@ const TaskList = () => {
       <div className= {tasksCSS.addTask}>
         <div className= {tasksCSS.numbersFacts}>
           <label for="frases">Numero de frases aleatorias a traer(1-10):</label>
-          <input type="number" id="frases" name="frases" min="1" max="10" value={num}  onChange={numberFacts}/>
-          <button onClick = {() => frasesSelect()} >Generar</button>
-
+          <div className= {tasksCSS.inputs}>
+           <input type="number" id="frases" name="frases" min="1" max="10" value={num}  onChange={numberFacts}/>
+           <button onClick = {() => phrasesSelect()} >Generar</button>
+          </div>
         </div>
         <FormTask
         addTaskCollection = {addTaskCollection}
@@ -128,12 +154,12 @@ const TaskList = () => {
            ))
         )}
           {(
-          userPhases.map((item) => (
+          userPhrases.map((item) => (
            <Task
             key={item.id} 
-            description = {item}
+            description = {item.frasesUsuario}
             button1 = {"Borrar"}
-            onClick={() => deleteTasks(item.id)}
+            onClick={() => {deletePhrase(item.id)}}
             button2 = {"Editar"}
             onClick2 = {() => setExistId(item.id)}
             />

@@ -4,20 +4,12 @@ import { useState, useEffect} from 'react';
 import {getIdTask} from '../login/firebaseAuth'
 
 // componente formato principal para la creacion de tareas 
-const FormTask= (props) => {
-    const {
-     addTaskCollection, 
-     descriptionTask, 
-     existId
-     
-    } = props
-
+const FormTask= ({addTaskCollection, descriptionTask, existId}) => {
     
-    const initialData = {
-        descriptionTask: '',
-    }
 
-    const [data, setData] = useState(initialData)   
+    const [data, setData] = useState({
+        descriptionTask: ""
+    })   
 
     // se leen los cambios de input descriptionTask
     const handleInputChange = (e) => {
@@ -27,22 +19,24 @@ const FormTask= (props) => {
         })
     }
 
+
     // se guardan los datos del input checkbox y descriptiontask en la base de datos de firebase
     const handleSubmit = e => {
         e.preventDefault();
-          addTaskCollection({...data}) 
-          setData({...initialData});  
+          addTaskCollection({...data});
       }
 
+      console.log(data)
 
-      const getTaskById  = async (id) => {
+
+    const getTaskById  = async (id) => {
         const doc = await getIdTask(id);
             setData({...doc.data()})
     }
 
     useEffect(() =>{
         if (existId === "") {
-            setData({...initialData });
+            setData({descriptionTask:""});
         } else {
             getTaskById(existId);
         }
@@ -58,7 +52,7 @@ const FormTask= (props) => {
                 name="descriptionTask"
                 onChange={handleInputChange}
                 required/>
-      <button type="submit" className="btn-guardar">  {existId === "" ? "Guardar" : "Actualizar"}</button>
+        <input type="submit" value={existId === "" ? "Guardar" : "Actualizar"}/>
      </form>
     );
 }

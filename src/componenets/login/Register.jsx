@@ -1,9 +1,8 @@
 import React from 'react'
 import Form from './FormLogin';
 import { useState , useEffect} from 'react';
-import { createUser , authListener } from './firebaseAuth';
+import { createUser , authListener, loginWithGoogle} from './firebaseAuth';
 import { Redirect } from 'react-router-dom';
-import { fb } from '../initializers/firebase';
 
 
 const Register = () => {
@@ -13,7 +12,7 @@ const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("")
   const [displayName, setDisplayName] = useState("")
-  const [nameUser, setNameUser] = useState(true)
+  const [nameUser, setNameUser] = useState(false)
 
 
   const clearInput= () => {
@@ -30,16 +29,9 @@ const Register = () => {
   const handleSignup = () => {
         clearErrors();
       createUser(email, password)
-      .then(() => {
-        let user = fb.auth().currentUser;
-        user.updateProfile({
-            displayName: displayName})
-            .then(() => {
-            console.log("registrado")
-            setDisplayName("")
-        }, function(error) {
-            console.log(error)
-        });        
+      .then((userCredential) => {
+        let user = userCredential.user;
+        console.log(user)
       }) 
      .catch(err => {
         switch (err.code) {
@@ -54,6 +46,15 @@ const Register = () => {
               setEmailError(err.message);
         }
       })
+    }
+
+    const handleGoogle = () => {
+      loginWithGoogle()
+      .then(res => {
+          setUser(res.user)
+          setDisplayName(res.user.displayName)
+      })
+      .catch(err => { console.log(err) })
     }
 
 
@@ -82,7 +83,6 @@ const Register = () => {
     <Form
       greeting = "Crea tu cuenta ToDo helper"
       btnLabel = "Registrarse"
-      // image = {img}
       email={email}
       setEmail={setEmail} 
       password={password} 
@@ -93,6 +93,7 @@ const Register = () => {
       setDisplayName = {setDisplayName}
       displayName = {displayName}
       nameUser = {nameUser}
+      handleGoogle = {handleGoogle}
       />   
      )}
     </div>

@@ -16,7 +16,8 @@ const Form = (props) => {
     greeting,
     displayName, 
     setDisplayName, 
-    nameUser
+    nameUser, 
+    handleGoogle
 } = props
 
 // Se escuchan los cambios ocurridos en inputs
@@ -55,6 +56,10 @@ const Form = (props) => {
                           <> </>
                         )}
                 </form> 
+                <div className={LoginCSS.providers}>
+                    <p>Ó Continuar con</p>
+                    <button onClick = { handleGoogle }>google</button>
+                </div> 
         </section>
     );
 };

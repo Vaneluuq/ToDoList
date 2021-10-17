@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from './FormLogin'
 import { useState, useEffect } from 'react';
-import {loginUser, authListener } from './firebaseAuth';
+import {loginUser, authListener, loginWithGoogle} from './firebaseAuth';
 import { Redirect } from 'react-router-dom';
 
 const Login = () => {
@@ -48,6 +48,13 @@ const Login = () => {
     })
 }
 
+const handleGoogle = () => {
+    loginWithGoogle().then(res => {
+            setUser(res.user)
+        })
+        .catch(err => { console.log(err) })
+      }
+
     const listenerAuth = () => {
         authListener((user) => {
             if(user){
@@ -84,6 +91,7 @@ const Login = () => {
             passwordError = {passwordError}
             nameUser = {nameUser}
             setNameUser = {setNameUser}
+            handleGoogle = {handleGoogle}
             />  
           )
          }

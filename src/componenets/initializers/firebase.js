@@ -14,10 +14,8 @@ import 'firebase/compat/firestore';
   };
   // Initialize Firebase
   const fb = firebase.initializeApp(firebaseConfig);
-  const google = new firebase.auth.GoogleAuthProvider()
   const db = fb.firestore();
+  const google = new firebase.auth.GoogleAuthProvider()
 
-     
 
-
-  export { fb, google, db } 
+  export { fb, db, google } 
